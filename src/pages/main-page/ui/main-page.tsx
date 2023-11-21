@@ -1,7 +1,13 @@
-import { Navigate } from 'react-router-dom';
+import { NewPost } from '../../../features/new-post'
+import { PostList } from '../../../widgets/post-list'
 
-import { AppRoute } from '../../../app/provider/router';
+export const MainPage = (): JSX.Element => {
+  return (
+    <>
+    <NewPost />
 
-const MainPage = (): JSX.Element => <Navigate to={AppRoute.Catalog} />;
+    <PostList />
+    </>
+  )
+}
 
-export default MainPage;
