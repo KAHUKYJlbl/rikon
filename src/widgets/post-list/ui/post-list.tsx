@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 
 import { getPostList, getPostLoadingStatus } from '../../../entities/post/model/post-selectors';
 import { getPosts } from '../../../entities/post/model/api-actions/get-posts';
+import { Post } from '../../../entities/post';
 import { useAppDispatch } from '../../../shared/lib/hooks/use-app-dispatch';
 import { useAppSelector } from '../../../shared/lib/hooks/use-app-selector';
 
@@ -31,12 +32,8 @@ export const PostList = (): JSX.Element => {
               {
                 postList
                   .filter((_post, postIndex) => (postIndex - columnIndex) % COLUMN_COUNT)
-                  .map((post, index) => (
-                    <div className={classes.element}>
-                      <h3>{post.title}</h3>
-
-                      <p>{post.body}</p>
-                    </div>
+                  .map((post) => (
+                    <Post post={post} />
                   ))
               }
             </div>
