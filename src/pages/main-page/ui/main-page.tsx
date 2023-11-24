@@ -1,13 +1,20 @@
-import { NewPost } from '../../../features/new-post'
-import { PostList } from '../../../widgets/post-list'
+import { NewPost } from '../../../features/new-post';
+import { PostList } from '../../../widgets/post-list';
 
-export const MainPage = (): JSX.Element => {
+import classes from './main-page.module.sass';
+
+type AppProps = {
+  height: number,
+  width: number,
+}
+
+export const MainPage = ({height = 500, width = 500}: AppProps): JSX.Element => {
   return (
-    <>
-    <NewPost />
+    <div className={classes.app} style={{height: `${height}px`, width: `${width}px`}}>
+      <NewPost />
 
-    <PostList />
-    </>
+      <PostList />
+    </div>
   )
 }
 

@@ -1,6 +1,6 @@
 export type PostType = {
   date: Date,
-  type: string,
+  title: string,
   body: string,
   id: string,
 };
