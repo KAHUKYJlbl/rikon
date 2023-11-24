@@ -27,13 +27,13 @@ export const PostList = (): JSX.Element => {
   return (
     <div className={classes.wrapper}>
         {
-          Array(COLUMN_COUNT).fill('').map((_column, columnIndex) => (
-            <div className={classes.column}>
+          Array(COLUMN_COUNT).fill('').map((column, columnIndex) => (
+            <div className={classes.column} key={`${column}-${columnIndex}`}>
               {
                 postList
                   .filter((_post, postIndex) => (postIndex - columnIndex) % COLUMN_COUNT)
                   .map((post) => (
-                    <Post post={post} />
+                    <Post post={post} key={post.title} />
                   ))
               }
             </div>
