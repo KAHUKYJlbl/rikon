@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 
-import { getPostList, getPostLoadingStatus } from '../../../entities/post/model/post-selectors';
-import { Post, getPosts } from '../../../entities/post';
+import { Post, getPostLoadingStatus, getPosts, getSortedPostList } from '../../../entities/post';
 import { useAppDispatch } from '../../../shared/lib/hooks/use-app-dispatch';
 import { useAppSelector } from '../../../shared/lib/hooks/use-app-selector';
 
@@ -14,7 +13,7 @@ type PostListProps = {
 
 export const PostList = ({width}: PostListProps): JSX.Element => {
   const dispatch = useAppDispatch();
-  const postList = useAppSelector(getPostList);
+  const postList = useAppSelector(getSortedPostList);
   const postLoadingStatus = useAppSelector(getPostLoadingStatus);
 
   useEffect(() => {

@@ -6,6 +6,7 @@ import { PostType } from '../lib/types';
 import { getPosts } from './api-actions/get-posts';
 import { FetchStatus } from '../../../shared/api/fetch-status';
 import { postPost } from './api-actions/post-post';
+import { deletePost } from './api-actions/delete-post';
 
 type InitialState = {
   posts: PostType[],
@@ -43,6 +44,16 @@ export const postSlice = createSlice({
         state.postsLoadingStatus = FetchStatus.Pending;
       })
       .addCase(postPost.rejected, (state) => {
+        state.postsLoadingStatus = FetchStatus.Failed;
+      })
+      .addCase(deletePost.fulfilled, (state, action) => {
+        state.posts = state.posts.filter((post) => post.id !== action.payload.id);
+        state.postsLoadingStatus = FetchStatus.Success;
+      })
+      .addCase(deletePost.pending, (state) => {
+        state.postsLoadingStatus = FetchStatus.Pending;
+      })
+      .addCase(deletePost.rejected, (state) => {
         state.postsLoadingStatus = FetchStatus.Failed;
       });
   }

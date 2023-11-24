@@ -3,3 +3,4 @@ export { postSlice } from './model/post-slice';
 export { Post } from './ui/post';
 export { postPost } from './model/api-actions/post-post';
 export { getPosts } from './model/api-actions/get-posts';
+export { getSortedPostList, getPostLoadingStatus } from './model/post-selectors';

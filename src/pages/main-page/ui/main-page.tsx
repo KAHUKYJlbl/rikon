@@ -8,7 +8,7 @@ type AppProps = {
   width: number,
 }
 
-export const MainPage = ({height = 562, width = 500}: AppProps): JSX.Element => {
+export const MainPage = ({height = 300, width = 300}: AppProps): JSX.Element => {
   return (
     <div className={classes.app} style={{height: `${height}px`, width: `${width}px`}}>
       <NewPost />

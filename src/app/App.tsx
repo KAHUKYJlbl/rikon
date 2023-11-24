@@ -6,7 +6,7 @@ import { MainPage } from '../pages/main-page';
 export default function App(): JSX.Element {
   return (
     <Provider store={store}>
-      <MainPage />
+      <MainPage height={562} width={500} />
     </Provider>
   );
 }
