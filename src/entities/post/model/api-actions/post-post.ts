@@ -4,21 +4,21 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../../../../app/provider/store';
 import { APIRoute } from '../../../../shared/api/routes';
 
-import { PostType } from '../../lib/types';
+import { NewPostType, PostType } from '../../lib/types';
 
-export const getPosts = createAsyncThunk<PostType[], undefined, {
+export const postPost = createAsyncThunk<PostType, NewPostType, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
-  'Posts/getPosts',
-  async (_arg, {extra: axios}) => {
+  'Posts/postPost',
+  async (newPost, {extra: axios}) => {
     try {
-      const { data } = await axios.get<PostType[]>(APIRoute.Posts);
+      const { data } = await axios.post<PostType>(APIRoute.Posts, newPost);
 
       return data;
     } catch (err) {
-      throw Error('Unable to get Posts');
+      throw Error('Unable to post Post');
     }
   },
 );

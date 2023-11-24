@@ -1,17 +1,18 @@
 import { useEffect } from 'react';
 
 import { getPostList, getPostLoadingStatus } from '../../../entities/post/model/post-selectors';
-import { getPosts } from '../../../entities/post/model/api-actions/get-posts';
-import { Post } from '../../../entities/post';
+import { Post, getPosts } from '../../../entities/post';
 import { useAppDispatch } from '../../../shared/lib/hooks/use-app-dispatch';
 import { useAppSelector } from '../../../shared/lib/hooks/use-app-selector';
 
 import classes from './post-list.module.sass';
+import { getColumnCount } from '../lib/get-column-count';
 
-const COLUMN_COUNT = 3;
-// TODO связать с шириной компонента
+type PostListProps = {
+  width: number;
+}
 
-export const PostList = (): JSX.Element => {
+export const PostList = ({width}: PostListProps): JSX.Element => {
   const dispatch = useAppDispatch();
   const postList = useAppSelector(getPostList);
   const postLoadingStatus = useAppSelector(getPostLoadingStatus);
@@ -20,6 +21,8 @@ export const PostList = (): JSX.Element => {
     dispatch(getPosts());
   }, []);
 
+  const columnCount = getColumnCount(width);
+
   if (postLoadingStatus.Loading && !postList.length) {
     return <div>Загрузка...</div>
   }
@@ -27,11 +30,11 @@ export const PostList = (): JSX.Element => {
   return (
     <div className={classes.wrapper}>
         {
-          Array(COLUMN_COUNT).fill('').map((column, columnIndex) => (
+          Array(columnCount).fill('').map((column, columnIndex) => (
             <div className={classes.column} key={`${column}-${columnIndex}`}>
               {
                 postList
-                  .filter((_post, postIndex) => (postIndex - columnIndex) % COLUMN_COUNT)
+                  .filter((_post, postIndex) => !((postIndex - columnIndex) % columnCount))
                   .map((post) => (
                     <Post post={post} key={post.title} />
                   ))

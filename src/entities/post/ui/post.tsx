@@ -1,3 +1,6 @@
+import dayjs from 'dayjs';
+import 'dayjs/locale/ru'
+
 import { PostType } from '../lib/types';
 import classes from './post.module.sass';
 
@@ -10,7 +13,9 @@ export const Post = ({post}: PostProps): JSX.Element => {
     <div className={classes.element}>
       <h3>{post.title}</h3>
 
-      <p>{post.body}</p>
+      <p>{dayjs(post.datetime).locale('ru').format('DD MMM YYYYг., HH:mm:ss')}</p>
+
+      <p dangerouslySetInnerHTML={{__html: post.body}} />
     </div>
   )
 };

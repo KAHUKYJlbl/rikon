@@ -5,6 +5,7 @@ import { NameSpace } from '../../../app/provider/store';
 import { PostType } from '../lib/types';
 import { getPosts } from './api-actions/get-posts';
 import { FetchStatus } from '../../../shared/api/fetch-status';
+import { postPost } from './api-actions/post-post';
 
 type InitialState = {
   posts: PostType[],
@@ -32,6 +33,16 @@ export const postSlice = createSlice({
         state.postsLoadingStatus = FetchStatus.Pending;
       })
       .addCase(getPosts.rejected, (state) => {
+        state.postsLoadingStatus = FetchStatus.Failed;
+      })
+      .addCase(postPost.fulfilled, (state, action) => {
+        state.posts = [...state.posts, action.payload];
+        state.postsLoadingStatus = FetchStatus.Success;
+      })
+      .addCase(postPost.pending, (state) => {
+        state.postsLoadingStatus = FetchStatus.Pending;
+      })
+      .addCase(postPost.rejected, (state) => {
         state.postsLoadingStatus = FetchStatus.Failed;
       });
   }
