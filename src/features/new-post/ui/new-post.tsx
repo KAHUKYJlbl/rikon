@@ -1,5 +1,4 @@
 import { ChangeEvent, useState } from 'react';
-import { nanoid } from 'nanoid';
 import { Editor, EditorState, RichUtils } from 'draft-js';
 import 'draft-js/dist/Draft.css';
 

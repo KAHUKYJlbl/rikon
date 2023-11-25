@@ -17,4 +17,3 @@ export const MainPage = ({height = 300, width = 300}: AppProps): JSX.Element => 
     </div>
   )
 }
-
